@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -18,31 +18,36 @@
       <h1>API Documentación</h1>
     </header>
     <main class="container">
-    
-      <div class="row mt-2 ">
+      <div class="row mt-2">
         <div class="col-12 m-2 p-4">
-        <h2>¿Por qué utilizar esta Api?</h2>
-      <p>Esta API de signos del zodíaco te permite consultar información de cada signo, sus características, fechas y predicciones diarias de forma sencilla.</p>
-      <em>los Link de GET estan cargados, salvo el de signos por fecha</em>
-      </div> 
-      <!--Usuarios-->
+          <h2>¿Por qué utilizar esta Api?</h2>
+          <p>
+            Esta API de signos del zodíaco te permite consultar información de
+            cada signo, sus características, fechas y predicciones diarias de
+            forma sencilla.
+          </p>
+          <em>los Link de GET estan cargados, salvo el de signos por fecha</em>
+        </div>
+        <!--Usuarios-->
         <div class="col-12 col-md-4">
           <h3>Rutas de Usuarios</h3>
           <ul class="list-group">
             <span class="badge text-bg-info p-2">GET</span>
             <li class="list-group-item list-group-item-info border border-info">
-              <a href="/api/users" target="_blank">/api/users</a><br><span> Ver lista de
-              usuarios</span><br>
-              <a href="/api/users/68cc49373e50f49b5dd202b0" target="_blank">/api/users/:id</a><br><span> Ver
-              usuarios id</span>
-              
+              <a href="/api/users" target="_blank">/api/users</a><br /><span>
+                Ver lista de usuarios</span
+              ><br />
+              <a href="/api/users/68cc49373e50f49b5dd202b0" target="_blank"
+                >/api/users/:id</a
+              ><br /><span> Ver usuarios id</span>
             </li>
             <span class="badge text-bg-success p-2">POST</span>
             <li
               class="list-group-item list-group-item-success border border-success"
             >
-              <a href="/api/users" target="_blank">/api/users</a><br><span>Guardar un
-              usuario nuevo</span>  
+              <a href="/api/users" target="_blank">/api/users</a><br /><span
+                >Guardar un usuario nuevo</span
+              >
               <pre class="bg-light m-1 p-1">
                <p>Ejemplo</p>          
         {
@@ -58,7 +63,7 @@
               class="list-group-item list-group-item-warning border border-warning"
             >
               <a href="/api/users/:id" target="_blank">/api/users/:id</a>
-              <br><span> Modificar usuario</span>
+              <br /><span> Modificar usuario</span>
               <pre class="bg-light m-1 p-1">
                 <p>Ejemplo</p>                                 
         {
@@ -73,27 +78,30 @@
             <li
               class="list-group-item list-group-item-danger border border-danger"
             >
-              <a href="/api/users/:id">/api/users/:id</a><br> <span>Selecciona el id que
-              quieras eliminar</span> 
+              <a href="/api/users/:id">/api/users/:id</a><br />
+              <span>Selecciona el id que quieras eliminar</span>
             </li>
-           
           </ul>
         </div>
 
         <!--signos-->
         <div class="col-12 col-md-4">
-             <h3>Rutas de Signos</h3>
-            <ul class="list-group">
+          <h3>Rutas de Signos</h3>
+          <ul class="list-group">
             <span class="badge text-bg-info p-2">GET</span>
             <li class="list-group-item list-group-item-info border border-info">
-              <a href="/api/signos" target="_blank">/api/signos</a><br>
-              <span> Ver lista de signos</span><br>
-               <a href="/api/signos/buscar/virgo" target="_blank">/api/signos/buscar/:nombre</a><br>
-               <span> Ver signos por nombre</span><br>
-                  <a href="/api/signos/68d2af67e354aa64fc5ab33c" target="_blank">/api/signos/:id</a>
-                  <br><span> Ver signos por ID</span><br>
-               <a href="/api/signos/signo" target="_blank">/api/signos/signo/</a><br><span> Ver
-              signos por Fecha</span>
+              <a href="/api/signs" target="_blank">/api/signos</a><br />
+              <span> Ver lista de signos</span><br />
+              <a href="/api/signos/buscar/virgo" target="_blank"
+                >/api/signos/buscar/:nombre</a
+              ><br />
+              <span> Ver signos por nombre</span><br />
+              <a href="/api/signos/68d2af67e354aa64fc5ab33c" target="_blank"
+                >/api/signos/:id</a
+              >
+              <br /><span> Ver signos por ID</span><br />
+              <a href="/api/signos/signo" target="_blank">/api/signos/signo/</a
+              ><br /><span> Ver signos por Fecha</span>
               <pre class="bg-light m-1 p-1">
 Ejemplo
  {
@@ -106,8 +114,9 @@ Ejemplo
             <li
               class="list-group-item list-group-item-success border border-success"
             >
-              <a href="/api/signos" target="_blank">/api/signos</a><br><span>Guardar un
-              signo nuevo</span>  
+              <a href="/api/signos" target="_blank">/api/signos</a><br /><span
+                >Guardar un signo nuevo</span
+              >
               <pre class="bg-light m-1 p-1">
                <p>Ejemplo</p>     
     {     
@@ -118,14 +127,16 @@ Ejemplo
       "icono": "💟",
       "caracteristicas": "Paciente - leal",
       "descripcion": "Breve texto"
-    }              </pre>
+    }              </pre
+              >
             </li>
             <span class="badge text-bg-warning p-2">PUT</span>
             <li
               class="list-group-item list-group-item-warning border border-warning"
             >
-              <a href="/api/users/:signo" target="_blank">/api/signos/:signo</a><br>
-             <span> Modificar Signo</span>
+              <a href="/api/users/:signo" target="_blank">/api/signos/:signo</a
+              ><br />
+              <span> Modificar Signo</span>
               <pre class="bg-light m-1 p-1">
                 <p>Ejemplo: puede modificar uno o varios campos</p>                                 
 {
@@ -139,38 +150,38 @@ Ejemplo
             <li
               class="list-group-item list-group-item-danger border border-danger"
             >
-              <a href="/api/users/:id">/api/signos/:id</a><br> 
-              <span>Selecciona el id que
-              quieras eliminar </span>
+              <a href="/api/users/:id">/api/signos/:id</a><br />
+              <span>Selecciona el id que quieras eliminar </span>
             </li>
-           
           </ul>
         </div>
 
         <!--Horóscopos-->
-         <div class="col-12 col-md-4">
-             <h3>Rutas de Horóscopos</h3>
-            <ul class="list-group">
+        <div class="col-12 col-md-4">
+          <h3>Rutas de Horóscopos</h3>
+          <ul class="list-group">
             <span class="badge text-bg-info p-2">GET</span>
             <li class="list-group-item list-group-item-info border border-info">
-              <a href="/api/horoscopos" target="_blank">/api/horoscopos</a><br>
-              <span>Ver lista de
-              horóscopos</span><br>
-              <a href="/api/horoscopos/68d1943b2469b9a8930731be" target="_blank">/api/horoscopos/:id</a><br>
-              <span>Ver 
-              horóscopos por ID</span><br>
-               <a href="/api/horoscopos/buscar/leo" target="_blank">/api/horoscopos/buscar/:name</a><br>
-              <span>Ver 
-              horóscopos por nombre del signo</span><br>
+              <a href="/api/horoscopos" target="_blank">/api/horoscopos</a
+              ><br />
+              <span>Ver lista de horóscopos</span><br />
+              <a href="/api/horoscopos/68d1943b2469b9a8930731be" target="_blank"
+                >/api/horoscopos/:id</a
+              ><br />
+              <span>Ver horóscopos por ID</span><br />
+              <a href="/api/horoscopos/buscar/leo" target="_blank"
+                >/api/horoscopos/buscar/:name</a
+              ><br />
+              <span>Ver horóscopos por nombre del signo</span><br />
             </li>
             <span class="badge text-bg-success p-2">POST</span>
             <li
               class="list-group-item list-group-item-success border border-success"
             >
-              <a href="/api/horoscopos" target="_blank">/api/horoscopos</a><br>
-              <span> Guardar un
-               horóscopo nuevo</span>
-              
+              <a href="/api/horoscopos" target="_blank">/api/horoscopos</a
+              ><br />
+              <span> Guardar un horóscopo nuevo</span>
+
               <pre class="bg-light m-1 p-1">
                <p>Ejemplo</p>          
 {
@@ -184,7 +195,9 @@ Ejemplo
             <li
               class="list-group-item list-group-item-warning border border-warning"
             >
-              <a href="/api/users/:horoscopos" target="_blank">/api/horoscopos/:id</a><br>
+              <a href="/api/users/:horoscopos" target="_blank"
+                >/api/horoscopos/:id</a
+              ><br />
               <span> Modificar horóscopo</span>
               <pre class="bg-light m-1 p-1">
                 <p>Ejemplo</p>                                 
@@ -198,13 +211,246 @@ Ejemplo
             <li
               class="list-group-item list-group-item-danger border border-danger"
             >
-              <a href="/api/horoscopos/:id">/api/horoscopos/:id</a><br> 
-              <span>Selecciona el id que
-              quieras eliminar</span>
+              <a href="/api/horoscopos/:id">/api/horoscopos/:id</a><br />
+              <span>Selecciona el id que quieras eliminar</span>
             </li>
-           
           </ul>
         </div>
+      </div>
+      <div>
+        <h2>compatibilidades</h2>
+        <h2>Aries</h2>
+        <li>
+          <a href="/api/compatibility/aries/aries">Aries</a>
+          <a href="/api/compatibility/aries/taurus">Tauro</a>
+          <a href="/api/compatibility/aries/gemini">Gemini</a>
+          <a href="/api/compatibility/aries/cancer">Cancer</a>
+          <a href="/api/compatibility/aries/leo">Leo</a>
+          <a href="/api/compatibility/aries/virgo">Virgo</a>
+          <a href="/api/compatibility/aries/libra">Libra</a>
+          <a href="/api/compatibility/aries/scorpio">Escorpio</a>
+          <a href="/api/compatibility/aries/sagittarius">Sagitario</a>
+          <a href="/api/compatibility/aries/capricorn">Capricornio</a>
+          <a href="/api/compatibility/aries/aquarius">Acuario</a>
+          <a href="/api/compatibility/aries/pisces">Piscis</a>
+        </li>
+      </div>
+      <div>
+        <h2>Tauro</h2>
+        <li>
+          <a href="/api/compatibility/taurus/aries">Aries</a>
+          <a href="/api/compatibility/taurus/taurus">Tauro</a>
+          <a href="/api/compatibility/taurus/gemini">Gemini</a>
+          <a href="/api/compatibility/taurus/cancer">Cancer</a>
+          <a href="/api/compatibility/taurus/leo">Leo</a>
+          <a href="/api/compatibility/taurus/virgo">Virgo</a>
+          <a href="/api/compatibility/taurus/libra">Libra</a>
+          <a href="/api/compatibility/taurus/scorpio">Escorpio</a>
+          <a href="/api/compatibility/taurus/sagittarius">Sagitario</a>
+          <a href="/api/compatibility/taurus/capricorn">Capricornio</a>
+          <a href="/api/compatibility/taurus/aquarius">Acuario</a>
+          <a href="/api/compatibility/taurus/pisces">Piscis</a>
+        </li>
+      </div>
+
+      <div>
+        <h2>Geminis</h2>
+        <li>
+          <a href="/api/compatibility/gemini/aries">Aries</a>
+          <a href="/api/compatibility/gemini/taurus">Tauro</a>
+          <a href="/api/compatibility/gemini/gemini">Gemini</a>
+          <a href="/api/compatibility/gemini/cancer">Cancer</a>
+          <a href="/api/compatibility/gemini/leo">Leo</a>
+          <a href="/api/compatibility/gemini/virgo">Virgo</a>
+          <a href="/api/compatibility/gemini/libra">Libra</a>
+          <a href="/api/compatibility/gemini/scorpio">Escorpio</a>
+          <a href="/api/compatibility/gemini/sagittarius">Sagitario</a>
+          <a href="/api/compatibility/gemini/capricorn">Capricornio</a>
+          <a href="/api/compatibility/gemini/aquarius">Acuario</a>
+          <a href="/api/compatibility/gemini/pisces">Piscis</a>
+        </li>
+      </div>
+
+      <div>
+        <h2>Cáncer</h2>
+        <li>
+          <a href="/api/compatibility/cancer/aries">Aries</a>
+          <a href="/api/compatibility/cancer/taurus">Tauro</a>
+          <a href="/api/compatibility/cancer/gemini">Geminis</a>
+          <a href="/api/compatibility/cancer/cancer">Cancer</a>
+          <a href="/api/compatibility/cancer/leo">Leo</a>
+          <a href="/api/compatibility/cancer/virgo">Virgo</a>
+          <a href="/api/compatibility/cancer/libra">Libra</a>
+          <a href="/api/compatibility/cancer/scorpio">Escorpio</a>
+          <a href="/api/compatibility/cancer/sagittarius">Sagitario</a>
+          <a href="/api/compatibility/cancer/capricorn">Capricornio</a>
+          <a href="/api/compatibility/cancer/aquarius">Acuario</a>
+          <a href="/api/compatibility/cancer/pisces">Piscis</a>
+        </li>
+      </div>
+
+      <div>
+        <h2>Leo</h2>
+        <li>
+          <a href="/api/compatibility/leo/aries">Aries</a>
+          <a href="/api/compatibility/leo/taurus">Tauro</a>
+          <a href="/api/compatibility/leo/gemini">Geminis</a>
+          <a href="/api/compatibility/leo/cancer">Cáncer</a>
+          <a href="/api/compatibility/leo/leo">Leo</a>
+          <a href="/api/compatibility/leo/virgo">Virgo</a>
+          <a href="/api/compatibility/leo/libra">Libra</a>
+          <a href="/api/compatibility/leo/scorpio">Escorpio</a>
+          <a href="/api/compatibility/leo/sagittarius">Sagitario</a>
+          <a href="/api/compatibility/leo/capricorn">Capricornio</a>
+          <a href="/api/compatibility/leo/aquarius">Acuario</a>
+          <a href="/api/compatibility/leo/pisces">Piscis</a>
+        </li>
+      </div>
+
+      <div>
+        <h2>Virgo</h2>
+        <li>
+          <a href="/api/compatibility/virgo/aries">Aries</a>
+          <a href="/api/compatibility/virgo/taurus">Tauro</a>
+          <a href="/api/compatibility/virgo/gemini">Geminis</a>
+          <a href="/api/compatibility/virgo/cancer">Cáncer</a>
+          <a href="/api/compatibility/virgo/leo">Leo</a>
+          <a href="/api/compatibility/virgo/virgo">Virgo</a>
+          <a href="/api/compatibility/virgo/libra">Libra</a>
+          <a href="/api/compatibility/virgo/scorpio">Escorpio</a>
+          <a href="/api/compatibility/virgo/sagittarius">Sagitario</a>
+          <a href="/api/compatibility/virgo/capricorn">Capricornio</a>
+          <a href="/api/compatibility/virgo/aquarius">Acuario</a>
+          <a href="/api/compatibility/virgo/pisces">Piscis</a>
+        </li>
+      </div>
+
+      <div>
+        <h2>Libra</h2>
+        <li>
+          <a href="/api/compatibility/libra/aries">Aries</a>
+          <a href="/api/compatibility/libra/taurus">Tauro</a>
+          <a href="/api/compatibility/libra/gemini">Geminis</a>
+          <a href="/api/compatibility/libra/cancer">Cáncer</a>
+          <a href="/api/compatibility/libra/leo">Leo</a>
+          <a href="/api/compatibility/libra/virgo">Virgo</a>
+          <a href="/api/compatibility/libra/libra">Libra</a>
+          <a href="/api/compatibility/libra/scorpio">Escorpio</a>
+          <a href="/api/compatibility/libra/sagittarius">Sagitario</a>
+          <a href="/api/compatibility/libra/capricorn">Capricornio</a>
+          <a href="/api/compatibility/libra/aquarius">Acuario</a>
+          <a href="/api/compatibility/libra/pisces">Piscis</a>
+        </li>
+      </div>
+
+      <div>
+        <h2>Escorpio</h2>
+        <li>
+          <a href="/api/compatibility/scorpio/aries">Aries</a>
+          <a href="/api/compatibility/scorpio/taurus">Tauro</a>
+          <a href="/api/compatibility/scorpio/gemini">Geminis</a>
+          <a href="/api/compatibility/scorpio/cancer">Cáncer</a>
+          <a href="/api/compatibility/scorpio/leo">Leo</a>
+          <a href="/api/compatibility/scorpio/virgo">Virgo</a>
+          <a href="/api/compatibility/scorpio/libra">Libra</a>
+          <a href="/api/compatibility/scorpio/scorpio">Escorpio</a>
+          <a href="/api/compatibility/scorpio/sagittarius">Sagitario</a>
+          <a href="/api/compatibility/scorpio/capricorn">Capricornio</a>
+          <a href="/api/compatibility/scorpio/aquarius">Acuario</a>
+          <a href="/api/compatibility/scorpio/pisces">Piscis</a>
+        </li>
+      </div>
+
+      <div>
+        <h2>Sagitario</h2>
+        <li>
+          <a href="/api/compatibility/sagittarius/aries">Aries</a>
+          <a href="/api/compatibility/sagittarius/taurus">Tauro</a>
+          <a href="/api/compatibility/sagittarius/gemini">Geminis</a>
+          <a href="/api/compatibility/sagittarius/cancer">Cáncer</a>
+          <a href="/api/compatibility/sagittarius/leo">Leo</a>
+          <a href="/api/compatibility/sagittarius/virgo">Virgo</a>
+          <a href="/api/compatibility/sagittarius/libra">Libra</a>
+          <a href="/api/compatibility/sagittarius/scorpio">Escorpio</a>
+          <a href="/api/compatibility/sagittarius/sagittarius">Sagitario</a>
+          <a href="/api/compatibility/sagittarius/capricorn">Capricornio</a>
+          <a href="/api/compatibility/sagittarius/aquarius">Acuario</a>
+          <a href="/api/compatibility/sagittarius/pisces">Piscis</a>
+        </li>
+      </div>
+
+      <div>
+        <h2>Capricornio</h2>
+        <li>
+          <a href="/api/compatibility/capricorn/aries">Aries</a>
+          <a href="/api/compatibility/capricorn/taurus">Tauro</a>
+          <a href="/api/compatibility/capricorn/gemini">Geminis</a>
+          <a href="/api/compatibility/capricorn/cancer">Cáncer</a>
+          <a href="/api/compatibility/capricorn/leo">Leo</a>
+          <a href="/api/compatibility/capricorn/virgo">Virgo</a>
+          <a href="/api/compatibility/capricorn/libra">Libra</a>
+          <a href="/api/compatibility/capricorn/scorpio">Escorpio</a>
+          <a href="/api/compatibility/capricorn/sagittarius">Sagitario</a>
+          <a href="/api/compatibility/capricorn/capricorn">Capricornio</a>
+          <a href="/api/compatibility/capricorn/aquarius">Acuario</a>
+          <a href="/api/compatibility/capricorn/pisces">Piscis</a>
+        </li>
+      </div>
+
+      <div>
+        <h2>Acuario</h2>
+        <li>
+          <a href="/api/compatibility/aquarius/aries">Aries</a>
+          <a href="/api/compatibility/aquarius/taurus">Tauro</a>
+          <a href="/api/compatibility/aquarius/gemini">Geminis</a>
+          <a href="/api/compatibility/aquarius/cancer">Cáncer</a>
+          <a href="/api/compatibility/aquarius/leo">Leo</a>
+          <a href="/api/compatibility/aquarius/virgo">Virgo</a>
+          <a href="/api/compatibility/aquarius/libra">Libra</a>
+          <a href="/api/compatibility/aquarius/scorpio">Escorpio</a>
+          <a href="/api/compatibility/aquarius/sagittarius">Sagitario</a>
+          <a href="/api/compatibility/aquarius/capricorn">Capricornio</a>
+          <a href="/api/compatibility/aquarius/aquarius">Acuario</a>
+          <a href="/api/compatibility/aquarius/pisces">Piscis</a>
+        </li>
+      </div>
+
+      <div>
+        <h2>Piscis</h2>
+        <li>
+          <a href="/api/compatibility/pisces/aries">Aries</a>
+          <a href="/api/compatibility/pisces/taurus">Tauro</a>
+          <a href="/api/compatibility/pisces/gemini">Geminis</a>
+          <a href="/api/compatibility/pisces/cancer">Cáncer</a>
+          <a href="/api/compatibility/pisces/leo">Leo</a>
+          <a href="/api/compatibility/pisces/virgo">Virgo</a>
+          <a href="/api/compatibility/pisces/libra">Libra</a>
+          <a href="/api/compatibility/pisces/scorpio">Escorpio</a>
+          <a href="/api/compatibility/pisces/sagittarius">Sagitario</a>
+          <a href="/api/compatibility/pisces/capricorn">Capricornio</a>
+          <a href="/api/compatibility/pisces/aquarius">Acuario</a>
+          <a href="/api/compatibility/pisces/pisces">Piscis</a>
+        </li>
+      </div>
+
+      <div>
+        <h2>Horoscopo Diario</h2>
+    
+</p>
+        <li>
+          <a href="/api/horoscopos/aries">Aries</a>
+          <a href="/api/horoscopos/taurus">Tauro</a>
+          <a href="/api/horoscopos/gemini">Geminis</a>
+          <a href="/api/horoscopos/cancer">Cáncer</a>
+          <a href="/api/horoscopos/leo">Leo</a>
+          <a href="/api/horoscopos/virgo">Virgo</a>
+          <a href="/api/horoscopos/libra">Libra</a>
+          <a href="/api/horoscopos/scorpio">Escorpio</a>
+          <a href="/api/horoscopos/sagittarius">Sagitario</a>
+          <a href="/api/horoscopos/capricorn">Capricornio</a>
+          <a href="/api/horoscopos/aquarius">Acuario</a>
+          <a href="/api/horoscopos/pisces">Piscis</a>
+        </li>
       </div>
     </main>
     <footer>

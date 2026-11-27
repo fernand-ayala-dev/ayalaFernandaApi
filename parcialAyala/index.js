@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+
 import routerAPI from "./routers/index.js";
 dotenv.config();
 const port =process.env.PORT;
@@ -30,6 +31,8 @@ app.get('/', (req, res) => {
   res.send('Servidor activo');
 });
 
+
+console.log("JWT_SECRET cargado:", Boolean(process.env.JWT_SECRET));
 
 routerAPI(app); 
 

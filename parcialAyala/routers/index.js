@@ -1,11 +1,13 @@
-import userRouter from './userRouter.js';
-import signosRouter from './signosRouter.js';
-import horoscopoRouter from './horoscoposRouter.js';
+import userRouter from "./userRouter.js";
+import signsRouter from "./signsRouter.js";
+import horoscopoRouter from "./horoscoposRouter.js";
+import compatibilityRouter from "./compatibilityRouter.js";
 
-const routerAPI = ( app) =>{
-    app.use('/api/users', userRouter);
-    app.use('/api/signos', signosRouter);
-    app.use('/api/horoscopos', horoscopoRouter);
-}
+const routerAPI = (app) => {
+  app.use("/api/users", userRouter);
+  app.use("/api/signs", signsRouter);
+  app.use("/api/horoscopos", horoscopoRouter);
+  app.use("/api/compatibility", compatibilityRouter);
+};
 
 export default routerAPI;

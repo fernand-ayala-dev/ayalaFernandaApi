@@ -1,32 +1,45 @@
 import mongoose from "mongoose";
-const Schema = mongoose.Schema;
 
-//solo el admin , indicará su rol
-const mySchema = new Schema({
+
+const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
+    trim: true,
   },
 
-  fechaNac:{
+  birthDate: {
     type: Date,
-     required: true,
+    required: true,
+  },
+
+  sign: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Signs",
+    required: true,
   },
 
   email: {
     type: String,
     required: true,
-    },
+    unique: true,
+    lowercase: true,
+    trim: true,
+  },
+
   password: {
     type: String,
     required: true,
   },
+
   rol: {
     type: String,
-    enum: ['user', 'admin'],
-    default: 'user'
+    enum: ["user", "admin"],
+    default: "user",
   },
-});
 
-const UserModel = mongoose.model("Usuarios", mySchema);
-export default UserModel; 
+}, { timestamps: true });
+
+const UserModel = mongoose.model("Users", userSchema);
+
+export default UserModel;

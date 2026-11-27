@@ -1,23 +1,26 @@
 import express from "express";
+
 import {
   getUsers,
   postUser,
+  loginUser,
   getUserById,
   deleteUserById,
   updateUserById,
 } from "../controllers/userController.js";
 
-/*
-El usuario solo puede crear y actualizar su perfil
----------------------------------------------------
-El admin puede crear y actualizar su perfil , eliminar perfil de otros usuarios
-Rol solo lo indica el admi
-*/
+import verifyToken from "../middlewares/authMiddleware.js";
+import isAdmin from "../middlewares/isAdmin.js";
+
 const router = express.Router();
-router.get("/", getUsers);
+
+
 router.post("/", postUser);
-router.get("/:id", getUserById);
-router.delete("/:id", deleteUserById);
-router.put("/:id", updateUserById);
+router.post("/login" ,loginUser);
+
+router.get("/", verifyToken, isAdmin, getUsers);
+router.get("/:id", verifyToken , getUserById);
+router.delete("/:id",verifyToken, isAdmin, deleteUserById);
+router.put("/:id", verifyToken, updateUserById);
 
 export default router;

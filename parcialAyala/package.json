@@ -6,14 +6,20 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --watch index.js"
+    "start": "node --watch index.js",
+    "dev": "nodemon node index.js"
   },
   "author": "FernandaAyala",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.20.0",
+    "bcrypt": "^6.0.0",
     "bootstrap": "^5.3.8",
     "dotenv": "^17.2.2",
-    "express": "^5.1.0",
-    "mongoose": "^8.18.1"
-  }
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^8.18.1",
+    "translate-google-api": "^1.0.4"
+  },
+  "keywords": []
 }

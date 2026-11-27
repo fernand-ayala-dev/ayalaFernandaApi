@@ -1,28 +1,22 @@
-import express from 'express';
-import {
-  getHoroscopo,
-  getHoroscopoByName,
-  getHoroscopoById,
-  postHoroscopo,
-  deleteHoroscopoById,
-  updateHorosById,
-}from '../controllers/horoscopoController.js';
+import express from "express";
 
-/*Esta tarea le corresponde solamente al admin
-por el momento esta echo para dar prediciones por dia , pero lo voy ampliar por semana y por mes 
-*/
+import {
+    
+    getHoroscopoBySign,
+    getWeeklyHoroscopo,
+    deleteHoroscopoById
+} from "../controllers/horoscopoController.js";
+
+import verifyToken from "../middlewares/authMiddleware.js";
+import isAdmin from "../middlewares/isAdmin.js";
+
 const router = express.Router();
-router.get('/', getHoroscopo);
-router.post('/', postHoroscopo);
-router.get('/buscar/:name', getHoroscopoByName);
-router.get('/:id', getHoroscopoById);
-router.delete('/:id', deleteHoroscopoById);
-router.put('/:id' , updateHorosById)
+
+
+router.get("/:sign/weekly", getWeeklyHoroscopo);
+
+router.get("/:sign", getHoroscopoBySign);
+
+router.delete("/:id", verifyToken, isAdmin, deleteHoroscopoById);
 
 export default router;
-
-
-
-
-
-

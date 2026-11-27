@@ -1,112 +1,234 @@
-import HoroscopoModel from "../models/horoscopoModel.js";
-// Crear: Create()
-const postHoroscopo = async (req, res) => {
-  try {
-    const { name, prediccion } = req.body;
 
-    if (!name || !prediccion) {
-      return res.status(400).json({ msg: "falta completar campos" });
-    }
-    const existeHoroscopo = await HoroscopoModel.findOne({ name });
-    if (existeHoroscopo) {
-      return res.status(400).json({ msg: "El horoscopo ya fue cargado" });
-    }
+import Horoscopo from "../models/horoscopoModel.js";
+import mongoose from "mongoose";
 
-    const horos = new HoroscopoModel({ name, prediccion });
-    const data = await horos.save();
-    res.status(200).json({ msg: 'ok, Horoscopo agregado', data:{ id: data._id, created: data.created} });
-  
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ msg: "No se pudo guardar el Horoscopo" });
-  }
-};
-// Lista de horóscopo: find()
-const getHoroscopo = async (req, res) => {
-  try {
-    const horoscopos = await HoroscopoModel.find();
-    res.status(200).json({ msg: "ok", data: horoscopos });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ msg: "No se pudo obtener la lista de Horoscopos" });
-  }
-};
-// Horoscopo por ID: findById()
-const getHoroscopoById = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const horos = await HoroscopoModel.findById(id);
-    if (horos) {
-      res.status(200).json({ msg: "Horoscopo por ID", data: horos });
-    } else
-      res
-        .status(404)
-        .json({ msg: "No se encontro Horoscopo que esta buscando", data: {} });
-  } catch (error) {
-    console.error(error);
-    res
-      .status(500)
-      .json({ msg: "Tenemos un error :( en el servidor ", data: {} });
-  }
-};
-// Horoscopo por name: findOne({ name: { $regex: `^${name}$`, $options: 'i' } })
-const getHoroscopoByName = async (req, res) =>{
-    try {
-        const name = req.params.name;
-        //busca por name del signo , uso la expresion para que de name que se pasa no distinga entre mayusculas y minusculas
-        //$regex $options
-         const signo = await HoroscopoModel.findOne({ name: { $regex: `^${name}$`, $options: 'i' } });
+// ==========================================
+// SIGNOS VÁLIDOS
+// ==========================================
 
-        if (signo) {
-            res.status(200).json({msg:`Resultado de busqueda Signo:  ${signo.name} ` , data: signo});
-        } else {
-            res.status(404).json({msg:'No se encontro el signo que buscas', data: {}})
-        }
-    } catch (error) {
-         console.error(error);
-        res.status(500).json({msg:'Tenemos un error :( en el servidor ', data: {}});
-    }
-}
-//Eliminar horoscopo por ID:findByIdAndDelete()
-const deleteHoroscopoById = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const horos = await HoroscopoModel.findByIdAndDelete(id);
-    if (horos) {
-      res.status(200).json({ msg: "Horoscopo Eliminado", data: horos._id });
-    } else {
-      res.status(404).json({ msg: "No se encontro horoscopo", data: {} });
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ msg: "Tenemos un error :( en el servidor ", data: {} });
-  }
+const validSigns = [
+    "aries",
+    "taurus",
+    "gemini",
+    "cancer",
+    "leo",
+    "virgo",
+    "libra",
+    "scorpio",
+    "sagittarius",
+    "capricorn",
+    "aquarius",
+    "pisces",
+];
+
+// ==========================================
+// FECHA ACTUAL
+// ==========================================
+
+const getToday = () => {
+    return new Date().toISOString().split("T")[0];
 };
-// Actualizar horoscopo por ID: findByIdAndUpdate()
-const updateHorosById = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { name, prediccion } = req.body;
-    if (!name || !prediccion) {
-      res.status(400).json({ msg: "Falta completar campos obligatorios" });
-    }
-    const horos = await HoroscopoModel.findByIdAndUpdate(id, {
-      name,
-      prediccion,
+
+// ==========================================
+// OBTENER HORÓSCOPO DIARIO O SEMANAL
+// ==========================================
+
+const getHoroscopo = async (sign, type) => {
+
+    const today = getToday();
+
+    // 1. BUSCAR EN MONGODB
+
+    const horoscopoExistente = await Horoscopo.findOne({
+        sign: sign,
+        type: type,
+        date: today,
     });
-    res.status(202).json({ msg: "horoscopo actualizado" });
-  } catch (error) {
-    console.error(error);
-    res
-      .status(500)
-      .json({ msg: "Tenemos un error :( en el servidor ", data: {} });
-  }
+
+    if (horoscopoExistente) {
+        console.log("Horóscopo encontrado en MongoDB");
+
+        return {
+            source: "database",
+            data: horoscopoExistente,
+        };
+    }
+
+    // 2. CONSULTAR FREEHOROSCOPEAPI
+
+    const params = new URLSearchParams({
+      lang: "es",
+      sign: sign,
+      
+    });
+
+    const url = `${process.env.HOROSCOPE_API}/get-horoscope/${type}?${params}`;
+
+    const response = await fetch(url);
+
+    if (!response.ok) {
+        const errorData = await response.text();
+
+        console.error("Error FreeHoroscopeAPI:", errorData);
+
+        throw new Error(
+            `Error al consultar FreeHoroscopeAPI: ${response.status}`
+        );
+    }
+
+    const data = await response.json();
+
+    console.log("Respuesta FreeHoroscopeAPI:", data);
+
+    // 3. OBTENER TEXTO DEL HORÓSCOPO
+
+    const text = data?.data?.horoscope;
+
+    if (!text) {
+        throw new Error(
+            "La API no devolvió el texto del horóscopo"
+        );
+    }
+
+    // 4. FECHA DE VENCIMIENTO
+
+    const tomorrow = new Date();
+
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(0, 0, 0, 0);
+
+    // 5. GUARDAR EN MONGODB
+
+    const horoscopo = new Horoscopo({
+        sign: sign,
+        type: type,
+        text: text,
+        date: today,
+        expiresAt: tomorrow,
+    });
+
+    await horoscopo.save();
+
+    console.log("==================================");
+    console.log("HORÓSCOPO GUARDADO EN MONGODB");
+    console.log(horoscopo);
+    console.log("==================================");
+
+    // 6. DEVOLVER RESULTADO
+
+    return {
+        source: "api",
+        data: horoscopo,
+    };
 };
+
+// ==========================================
+// HORÓSCOPO DIARIO
+// GET /api/horoscopo/:sign
+// ==========================================
+
+const getHoroscopoBySign = async (req, res) => {
+
+    try {
+
+        let { sign } = req.params;
+
+        sign = sign.toLowerCase().trim();
+
+        if (!validSigns.includes(sign)) {
+            return res.status(400).json({
+                message: "Signo zodiacal inválido",
+            });
+        }
+
+        const resultado = await getHoroscopo(sign, "daily");
+
+        return res.status(200).json(resultado);
+
+    } catch (error) {
+
+        console.error("Error horóscopo diario:", error);
+
+        return res.status(500).json({
+            message: "Error interno del servidor",
+            error: error.message,
+        });
+    }
+};
+
+// ==========================================
+// HORÓSCOPO SEMANAL
+// GET /api/horoscopo/:sign/weekly
+// ==========================================
+
+const getWeeklyHoroscopo = async (req, res) => {
+
+    try {
+
+        let { sign } = req.params;
+
+        sign = sign.toLowerCase().trim();
+
+        if (!validSigns.includes(sign)) {
+            return res.status(400).json({
+                message: "Signo zodiacal inválido",
+            });
+        }
+
+        const resultado = await getHoroscopo(sign, "weekly");
+
+        return res.status(200).json(resultado);
+
+    } catch (error) {
+
+        console.error("Error horóscopo semanal:", error);
+
+        return res.status(500).json({
+            message: "Error interno del servidor",
+            error: error.message,
+        });
+    }
+};
+
+// ==========================================
+// ELIMINAR HORÓSCOPO
+// DELETE /api/horoscopo/:id
+// ==========================================
+
+const deleteHoroscopoById = async (req, res) => {
+
+    try {
+
+        const { id } = req.params;
+if (!mongoose.isValidObjectId(id)) {
+  return res.status(400).json({
+    message: "El ID del horóscopo no es válido",
+  });
+}
+        const horoscopo = await Horoscopo.findByIdAndDelete(id);
+
+        if (!horoscopo) {
+            return res.status(404).json({
+                message: "Horóscopo no encontrado",
+            });
+        }
+
+        return res.status(200).json({
+            message: "Horóscopo eliminado correctamente",
+            data: horoscopo,
+        });
+
+    } catch (error) {
+
+        console.error("Error eliminando horóscopo:", error);
+
+        return res.status(500).json({
+            message: "Error al eliminar el horóscopo",
+            error: error.message,
+        });
+    }
+};
+
 export {
-  postHoroscopo,
-  getHoroscopo,
-  getHoroscopoById,
-  getHoroscopoByName,
-  deleteHoroscopoById,
-  updateHorosById,
-};
+   getToday, getHoroscopo, getHoroscopoBySign, getWeeklyHoroscopo, deleteHoroscopoById
+}
